@@ -328,7 +328,7 @@ function Footer({ onNavigate }) {
 
         <div className="tandem-footer-col">
           <span className="tandem-footer-heading">Project</span>
-          <a className="tandem-footer-link" href="#" target="_blank" rel="noreferrer">GitHub</a>
+          <a className="tandem-footer-link" href="https://github.com/tandem-net/tandem.github.io" target="_blank" rel="noreferrer">GitHub</a>
           <span className="tandem-footer-link tandem-footer-static">Open source · MIT License</span>
         </div>
       </div>
@@ -480,6 +480,7 @@ function App() {
     }
   };
 
+  // Intentionally runs once; frame functions read mutable refs.
   useEffect(() => {
     const resize = () => {
       const canvas = canvasRef.current;
@@ -505,7 +506,7 @@ function App() {
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener('resize', resize);
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <View style={styles.appContainer}>
