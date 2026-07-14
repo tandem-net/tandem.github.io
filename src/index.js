@@ -328,7 +328,7 @@ function Footer({ onNavigate }) {
 
         <div className="tandem-footer-col">
           <span className="tandem-footer-heading">Project</span>
-          <a className="tandem-footer-link" href="#" target="_blank" rel="noreferrer">GitHub</a>
+          <a className="tandem-footer-link" href="https://github.com/tandem-net/tandem-aio" target="_blank" rel="noreferrer">GitHub</a>
           <span className="tandem-footer-link tandem-footer-static">Open source · MIT License</span>
         </div>
       </div>
@@ -372,20 +372,6 @@ function App() {
     }
   };
 
-  const ensureWindow = (center) => {
-    const start = Math.max(1, center - PRELOAD_BEHIND);
-    const end = Math.min(FRAME_COUNT, center + PRELOAD_AHEAD);
-    for (let i = start; i <= end; i++) loadBitmap(i);
-
-    for (const k of Array.from(cacheRef.current.keys())) {
-      if (k < start - 20 || k > end + 20) {
-        const b = cacheRef.current.get(k);
-        if (b && b.close) try { b.close(); } catch (e) {}
-        cacheRef.current.delete(k);
-      }
-    }
-  };
-
   // Progress is measured against the pinned stage's own scroll range, not
   // the whole document — so content added before/after it doesn't affect
   // playback speed.
@@ -398,15 +384,6 @@ function App() {
     const viewportHeight = window.innerHeight;
     const scrollableRange = Math.max(containerHeight - viewportHeight, 1);
     return { containerTop, scrollableRange };
-  };
-
-  const computeFrame = () => {
-    const metrics = getStageMetrics();
-    if (!metrics) return currentRef.current;
-    const scrolled = window.scrollY - metrics.containerTop;
-    const progress = Math.min(1, Math.max(0, scrolled / metrics.scrollableRange));
-    const idx = Math.round(progress * (FRAME_COUNT - 1)) + 1;
-    return Math.min(FRAME_COUNT, Math.max(1, idx));
   };
 
   const drawToCanvas = (bitmap) => {
@@ -481,6 +458,29 @@ function App() {
   };
 
   useEffect(() => {
+    const ensureWindow = (center) => {
+      const start = Math.max(1, center - PRELOAD_BEHIND);
+      const end = Math.min(FRAME_COUNT, center + PRELOAD_AHEAD);
+      for (let i = start; i <= end; i++) loadBitmap(i);
+
+      for (const k of Array.from(cacheRef.current.keys())) {
+        if (k < start - 20 || k > end + 20) {
+          const b = cacheRef.current.get(k);
+          if (b && b.close) try { b.close(); } catch (e) {}
+          cacheRef.current.delete(k);
+        }
+      }
+    };
+
+    const computeFrame = () => {
+      const metrics = getStageMetrics();
+      if (!metrics) return currentRef.current;
+      const scrolled = window.scrollY - metrics.containerTop;
+      const progress = Math.min(1, Math.max(0, scrolled / metrics.scrollableRange));
+      const idx = Math.round(progress * (FRAME_COUNT - 1)) + 1;
+      return Math.min(FRAME_COUNT, Math.max(1, idx));
+    };
+
     const resize = () => {
       const canvas = canvasRef.current;
       if (!canvas) return;
