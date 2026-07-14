@@ -13,7 +13,7 @@ const ANIMATION_HEIGHT_VH = 1120; // total scroll length of the pinned stage
 const PRELOAD_AHEAD = 40;
 const PRELOAD_BEHIND = 10;
 const NAV_HEIGHT = 80;
-
+//ho
 const pad = (n) => String(n).padStart(4, '0');
 const frameUrl = (i) => `${FRAME_FOLDER}/frame_${pad(i)}${FRAME_EXT}`;
 const reducedMotion = () =>
