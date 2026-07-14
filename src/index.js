@@ -13,7 +13,7 @@ const ANIMATION_HEIGHT_VH = 1120; // total scroll length of the pinned stage
 const PRELOAD_AHEAD = 40;
 const PRELOAD_BEHIND = 10;
 const NAV_HEIGHT = 80;
-//ho
+//heroSubtext
 const pad = (n) => String(n).padStart(4, '0');
 const frameUrl = (i) => `${FRAME_FOLDER}/frame_${pad(i)}${FRAME_EXT}`;
 const reducedMotion = () =>
@@ -191,7 +191,7 @@ function Hero({ heroRef }) {
         <Text style={styles.heroEyebrow}>DISTRIBUTED · OPEN SOURCE</Text>
         <Text style={styles.heroTitle}>Tandem</Text>
         <Text style={styles.heroTagline}>
-          A database built from the computers you already have.
+          A database built from the computers you already have test67.
         </Text>
         <Text style={styles.heroBody}>
           Tandem pools storage and compute across a network of everyday
