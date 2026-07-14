@@ -169,7 +169,7 @@ export const FOUNDERS = [
   },
   {
     id: "founder-5",
-    name: "Shamgar David",
+    name: "Shamgar David 67",
     role: "Founder · Security",
     bio: "Shapes the trust model that allows the network to stay private and reliable.",
   },
