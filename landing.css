@@ -76,10 +76,12 @@
 .lp-tandemize { font-family: var(--font-display); font-weight: 900; letter-spacing: -.03em; line-height: 1; color: #fff; margin: 14px 0 0; font-size: clamp(38px,9vw,88px); }
 .lp-roll { color: var(--color-main); font-style: normal; display: inline-block; position: relative; margin-top: .08em; padding-bottom: .1em; }
 .lp-roll::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: .1em; background: var(--color-accent-gold); }
-.lp-roll-out { animation: lp-rollout .32s cubic-bezier(.4,0,.7,.2) forwards; }
-.lp-roll-in { animation: lp-rollin .46s cubic-bezier(.2,.8,.2,1) forwards; }
-@keyframes lp-rollout { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-.55em); } }
-@keyframes lp-rollin { 0% { opacity: 0; transform: translateY(.6em); } 100% { opacity: 1; transform: translateY(0); } }
+.lp-roll-out { animation: lp-rollout .42s cubic-bezier(.4,0,.7,.2) forwards; }
+.lp-roll-in { animation: lp-rollin .5s cubic-bezier(.2,.8,.2,1) forwards; }
+@keyframes lp-rollout { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-.5em); } }
+@keyframes lp-rollin { 0% { opacity: 0; transform: translateY(.55em); } 100% { opacity: 1; transform: translateY(0); } }
+/* blinking caret marks the rolling word as a changing slot */
+.lp-rollcaret { display: inline-block; width: .07em; height: .78em; margin-left: .1em; vertical-align: -.06em; background: var(--color-main); border-radius: 2px; animation: lp-blink 1s steps(1) infinite; }
 .lp-finale-sub { font-weight: 500; line-height: 1.55; color: var(--color-accent-sand); max-width: 470px; margin: 20px auto 0; font-size: clamp(15px,1.9vw,18px); }
 .lp-launchbtn { text-decoration: none; margin-top: clamp(30px,4.4vw,46px); transition: transform .16s ease, box-shadow .16s ease; }
 .lp-launchbtn:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
@@ -92,7 +94,14 @@
 .lp-spin-ccw { animation: lp-spin var(--dur,64s) linear infinite reverse; }
 @keyframes lp-spin { to { transform: rotate(360deg); } }
 @keyframes lp-wander { 0%,100% { transform: translate(0,0); } 25% { transform: translate(var(--x1,18px), var(--y1,-14px)); } 50% { transform: translate(var(--x2,-13px), var(--y2,15px)); } 75% { transform: translate(var(--x3,15px), var(--y3,11px)); } }
-@media (prefers-reduced-motion: reduce) { .lp-tet-w, .lp-spin-cw, .lp-spin-ccw { animation: none; } }
+/* Reduced motion: stay calmer, but not frozen. Keep a gentle in-place spin
+   (the shapes still turn), but drop the translational drift/parallax — the
+   higher-risk kind of motion — and hold the caret steady. */
+@media (prefers-reduced-motion: reduce) {
+  .lp-tet-w { animation: none; }
+  .lp-spin-cw, .lp-spin-ccw { animation-duration: 30s; }
+  .lp-rollcaret { animation: none; }
+}
 
 @media (max-width: 720px) {
   .lp-step { grid-template-columns: 1fr; gap: 20px; }
