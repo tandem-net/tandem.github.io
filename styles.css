@@ -1,0 +1,292 @@
+/* ============================================================
+   TANDEM DESIGN SYSTEM — foundation stylesheet
+   Imported from the "Tandem Design System" Claude Design project:
+   tokens (colors · typography · spacing · effects) + component
+   primitives (tnd-*) + a small page reset. Page-specific styles
+   for the landing page live in landing.css.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* ============================================================
+   COLOR TOKENS
+   Grounded in the brand logo: deep navy #001550 + warm red
+   #CC2936 on white. Neobrutalist and warm: navy is the "ink"
+   (borders, text, hard shadows), red is the primary accent,
+   paper is a warm cream. No cool blues, no purple, no gradients.
+   ============================================================ */
+:root {
+  /* --- Brand core (sampled from the logo) --- */
+  --tandem-navy: #001550;         /* the ink: borders, text, shadows, dark surfaces */
+  --tandem-navy-700: #0A2166;     /* raised navy surface */
+  --tandem-navy-500: #23367A;     /* navy hover / hairlines on dark */
+  --tandem-red: #CC2936;          /* primary accent */
+  --tandem-red-600: #B01F2C;      /* red pressed / hover */
+  --tandem-white: #FFFFFF;
+
+  /* --- Warm paper & surfaces --- */
+  --tandem-paper: #F4ECE0;        /* warm cream page background */
+  --tandem-surface: #FDFAF4;      /* warm off-white card / input surface */
+  --tandem-surface-alt: #EFE4D3;  /* deeper warm surface / row hover */
+
+  /* --- Warm secondary accents --- */
+  --tandem-gold: #E8A33D;         /* amber highlight */
+  --tandem-clay: #D9673A;         /* terracotta / warm orange */
+  --tandem-sand: #E9D8B8;         /* soft warm fill */
+
+  /* --- Semantic status (kept warm) --- */
+  --tandem-green: #2F9E5B;        /* node online / success */
+  --tandem-amber: #E8A33D;        /* warning */
+  --tandem-danger: #CC2936;       /* offline / danger (brand red) */
+
+  /* --- Neutral ramp (warm-leaning) --- */
+  --tandem-gray-100: #EDE7DD;
+  --tandem-gray-300: #C9BFAF;
+  --tandem-gray-500: #857C6C;
+  --tandem-gray-700: #4A4437;
+  --tandem-black: #001550;
+
+  /* --- Semantic aliases (reference these in components) --- */
+  --color-background: var(--tandem-paper);
+  --color-surface: var(--tandem-surface);
+  --color-surface-alt: var(--tandem-surface-alt);
+  --color-surface-dark: var(--tandem-navy);
+  --color-border: var(--tandem-navy);
+  --color-ring: var(--tandem-red);
+
+  --color-text: var(--tandem-navy);
+  --color-text-muted: var(--tandem-gray-500);
+  --color-text-on-main: var(--tandem-white);
+  --color-text-on-dark: #F4ECE0;
+  --color-text-inverse: var(--tandem-white);
+
+  --color-main: var(--tandem-red);
+  --color-main-hover: var(--tandem-red-600);
+
+  --color-accent-navy: var(--tandem-navy);
+  --color-accent-gold: var(--tandem-gold);
+  --color-accent-clay: var(--tandem-clay);
+  --color-accent-sand: var(--tandem-sand);
+
+  --color-success: var(--tandem-green);
+  --color-warning: var(--tandem-amber);
+  --color-danger: var(--tandem-danger);
+
+  --color-overlay: rgba(0, 21, 80, 0.6);
+}
+
+/* ============================================================
+   TYPOGRAPHY TOKENS
+   Display: Archivo · Body/UI: Public Sans · Mono: JetBrains Mono
+   ============================================================ */
+:root {
+  --font-display: 'Archivo', system-ui, sans-serif;
+  --font-body: 'Public Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+  --weight-base: 500;
+  --weight-medium: 600;
+  --weight-bold: 700;
+  --weight-heading: 800;
+  --weight-black: 900;
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+  --text-3xl: 36px;
+  --text-4xl: 48px;
+  --text-5xl: 64px;
+  --text-6xl: 84px;
+
+  --leading-tight: 1.02;
+  --leading-snug: 1.2;
+  --leading-normal: 1.5;
+
+  --tracking-tight: -0.03em;
+  --tracking-snug: -0.01em;
+  --tracking-wide: 0.08em;
+}
+
+/* ============================================================
+   SPACING TOKENS — 4px base grid.
+   ============================================================ */
+:root {
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  --container-max: 1240px;
+  --gutter: 24px;
+}
+
+/* ============================================================
+   EFFECTS TOKENS
+   2px ink borders, hard offset shadows (no blur), snappy press.
+   ============================================================ */
+:root {
+  --border-width: 2px;
+  --border-width-thick: 3px;
+  --border: var(--border-width) solid var(--color-border);
+  --border-thick: var(--border-width-thick) solid var(--color-border);
+
+  --radius-sm: 3px;
+  --radius-base: 5px;
+  --radius-lg: 8px;
+  --radius-full: 999px;
+
+  --shadow-offset-x: 4px;
+  --shadow-offset-y: 4px;
+  --shadow: 4px 4px 0 0 var(--color-border);
+  --shadow-sm: 2px 2px 0 0 var(--color-border);
+  --shadow-lg: 6px 6px 0 0 var(--color-border);
+  --shadow-xl: 10px 10px 0 0 var(--color-border);
+  --shadow-reverse: -4px -4px 0 0 var(--color-border);
+
+  --ease-snap: cubic-bezier(0.2, 0, 0, 1);
+  --transition-press: transform 0.12s var(--ease-snap), box-shadow 0.12s var(--ease-snap);
+}
+
+/* ============================================================
+   BASE / RESET
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: var(--weight-base);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+a { color: inherit; }
+
+:focus-visible { outline: 3px solid var(--color-ring); outline-offset: 2px; }
+
+/* ============================================================
+   COMPONENT STYLES  (tnd-*)
+   Plain-CSS translation of the neobrutalist primitives.
+   ============================================================ */
+
+/* ---------- BUTTON ---------- */
+.tnd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  white-space: nowrap;
+  font-family: var(--font-body);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-sm);
+  line-height: 1;
+  border: var(--border);
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  transition: var(--transition-press);
+  color: var(--color-text-on-main);
+  background: var(--color-main);
+  box-shadow: var(--shadow);
+}
+.tnd-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow), 0 0 0 3px var(--color-ring);
+}
+/* size */
+.tnd-btn--sm { height: 36px; padding: 0 var(--space-3); font-size: var(--text-xs); }
+.tnd-btn--md { height: 44px; padding: 0 var(--space-5); }
+.tnd-btn--lg { height: 52px; padding: 0 var(--space-8); font-size: var(--text-base); }
+.tnd-btn--icon { height: 44px; width: 44px; padding: 0; }
+/* variant: default (presses into its shadow) */
+.tnd-btn--default:hover { transform: translate(var(--shadow-offset-x), var(--shadow-offset-y)); box-shadow: none; }
+/* variant: neutral (white surface) */
+.tnd-btn--neutral { background: var(--color-surface); color: var(--color-text); }
+.tnd-btn--neutral:hover { transform: translate(var(--shadow-offset-x), var(--shadow-offset-y)); box-shadow: none; }
+/* variant: accent hues */
+.tnd-btn--navy { background: var(--color-accent-navy); color: var(--color-text-on-dark); }
+.tnd-btn--navy:hover, .tnd-btn--gold:hover, .tnd-btn--clay:hover { transform: translate(var(--shadow-offset-x), var(--shadow-offset-y)); box-shadow: none; }
+.tnd-btn--gold { background: var(--color-accent-gold); color: var(--tandem-navy); }
+.tnd-btn--clay { background: var(--color-accent-clay); color: var(--color-text-on-main); }
+/* variant: reverse (flat at rest, shadow appears on hover) */
+.tnd-btn--reverse { box-shadow: none; }
+.tnd-btn--reverse:hover { transform: translate(-4px, -4px); box-shadow: var(--shadow); }
+/* variant: noShadow */
+.tnd-btn--noShadow { box-shadow: none; }
+.tnd-btn:disabled { opacity: 0.5; pointer-events: none; }
+.tnd-btn:active { transform: translate(var(--shadow-offset-x), var(--shadow-offset-y)); box-shadow: none; }
+
+/* ---------- BADGE ---------- */
+.tnd-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  width: fit-content;
+  padding: 3px 10px;
+  font-family: var(--font-body);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xs);
+  line-height: 1.3;
+  border: var(--border);
+  border-radius: var(--radius-base);
+  background: var(--color-main);
+  color: var(--color-text-on-main);
+  white-space: nowrap;
+}
+.tnd-badge--neutral { background: var(--color-surface); color: var(--color-text); }
+.tnd-badge--navy { background: var(--color-accent-navy); color: var(--color-text-on-dark); }
+.tnd-badge--gold { background: var(--color-accent-gold); color: var(--tandem-navy); }
+.tnd-badge--clay { background: var(--color-accent-clay); }
+.tnd-badge--success { background: var(--color-success); color: var(--color-text-on-main); }
+.tnd-badge--danger { background: var(--color-danger); color: var(--color-text-inverse); }
+
+/* ---------- CARD ---------- */
+.tnd-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: var(--border);
+  border-radius: var(--radius-base);
+  box-shadow: var(--shadow);
+}
+.tnd-card__title { font-family: var(--font-display); font-weight: var(--weight-heading); font-size: var(--text-xl); line-height: 1.1; }
+.tnd-card__desc { font-size: var(--text-sm); color: var(--color-text-muted); font-weight: var(--weight-base); }
+.tnd-card__header { display: flex; flex-direction: column; gap: var(--space-1); }
+.tnd-card__footer { display: flex; align-items: center; gap: var(--space-3); }
+
+/* ---------- WORDMARK ---------- */
+.tnd-wordmark {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+  line-height: 1;
+}
+.tnd-wordmark__glyph {
+  display: inline-grid; place-items: center;
+  border: var(--border); border-radius: var(--radius-sm);
+  background: var(--color-main);
+  aspect-ratio: 1;
+}
