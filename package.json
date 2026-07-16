@@ -1,0 +1,13 @@
+{
+  "name": "tandem",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tandem — neobrutalist landing page. Cloud hosting by developers, for developers.",
+  "homepage": "https://tandemize.app",
+  "license": "MIT",
+  "scripts": {
+    "build": "node build.js",
+    "start": "node build.js && node scripts/serve.js",
+    "serve": "node scripts/serve.js"
+  }
+}
