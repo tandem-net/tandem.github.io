@@ -69,9 +69,16 @@
     var idx = Math.max(0, ROLL_WORDS.indexOf(rollEl.textContent.trim()));
 
     if (reduced) {
+      // Reduced motion: a plain opacity crossfade (no travel) still reads as
+      // "this word changes" without the vestibular cost of sliding/spinning.
+      rollEl.style.transition = 'opacity .3s ease';
       timers.push(setInterval(function () {
         idx = (idx + 1) % ROLL_WORDS.length;
-        rollEl.textContent = ROLL_WORDS[idx];
+        rollEl.style.opacity = '0';
+        timers.push(setTimeout(function () {
+          rollEl.textContent = ROLL_WORDS[idx];
+          rollEl.style.opacity = '1';
+        }, 300));
       }, ROLL_INTERVAL_MS));
     } else {
       rollEl.addEventListener('animationend', function (e) {
